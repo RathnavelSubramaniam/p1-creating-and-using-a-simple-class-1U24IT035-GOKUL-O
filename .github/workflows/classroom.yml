@@ -1,0 +1,35 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: 'P1-Creating and Using a Simple Class '
+      id: p1-creating-and-using-a-simple-class
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'P1-Creating and Using a Simple Class '
+        setup-command: ''
+        command: javac Practical1.java && java Practical1
+        input: ''
+        expected-output: |
+          Person1: John Doe
+          Person2: Alice Smith
+          Average age: 27.5
+        comparison-method: contains
+        timeout: 10
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        P1-CREATING-AND-USING-A-SIMPLE-CLASS_RESULTS: "${{steps.p1-creating-and-using-a-simple-class.outputs.result}}"
+      with:
+        runners: p1-creating-and-using-a-simple-class
