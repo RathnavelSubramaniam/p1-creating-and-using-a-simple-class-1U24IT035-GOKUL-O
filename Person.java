@@ -1,7 +1,7 @@
 class Person {
-    String firstName;
-    String lastName;
-    int age;
+    private String firstName;
+    private String lastName;
+    private int age;
 
     // Default constructor
     public Person() {
@@ -21,20 +21,25 @@ class Person {
     public String getFullName() {
         return firstName + " " + lastName; // Add space between first and last name
     }
+
+    // Getter method for age
+    public int getAge() {
+        return age;
+    }
 }
 
-public Class Practical1{
+public class Practical1 {
     public static void main(String[] args) {
         // Create two Person objects
         Person person1 = new Person("John", "Doe", 30);
         Person person2 = new Person("Alice", "Smith", 25);
 
         // Print full names of both persons
-        System.out.println("Person 1":+ person1.getFullName());
-        System.out.println("Person 2":+ person2.getFullName());
+        System.out.println("Person 1: " + person1.getFullName());
+        System.out.println("Person 2: " + person2.getFullName());
 
         // Calculate and print the average age
-        double averageAge = (person1.age + person2.age) / 2.0;
+        double averageAge = (person1.getAge() + person2.getAge()) / 2.0;
         System.out.println("Average Age: " + averageAge);
     }
 }
